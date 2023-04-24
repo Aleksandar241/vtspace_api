@@ -60,7 +60,7 @@ router.post('/logout', async (req, res)=>{
       return;
     }
     res.clearCookie('accessToken');
-    res.redirect('/');
+
 })
 
 
