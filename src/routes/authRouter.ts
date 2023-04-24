@@ -43,7 +43,7 @@ router.post('/login', emailValidator, passwordValidator, handleErrorsMiddleware,
     try {
         const token = await login({email, password});
         res.status(200)
-        res.cookie('accessToken', token, {maxAge: Date.now() + 10 * 365 * 24 * 60 * 60 * 1000,httpOnly: true });
+        res.cookie('accessToken', token, {maxAge: Date.now() + 10 * 365 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'none' });
         res.json({token})
     } catch (error) {
         next(error)
