@@ -1,4 +1,4 @@
-import { authRouter } from "./authRouter";
-import { postsRouter } from "./postsRouter";
+import { authRouter } from "./authRouter.js";
+import { postsRouter } from "./postsRouter.js";
 
 export {authRouter, postsRouter}

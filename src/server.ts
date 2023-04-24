@@ -3,8 +3,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import { authRouter, postsRouter } from './routes';
-import { authMiddleware } from './utils';
+import { authRouter, postsRouter } from './routes/index.js';
+import { authMiddleware } from './utils/index.js';
 
 
 const app = express();

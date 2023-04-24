@@ -1,5 +1,5 @@
 import nodemailer  from 'nodemailer';
-import {prisma, hashPassword, comparePasswords, createJWT, verifyEmailJWT, createEmailJWT, CustomException} from '../utils';
+import {prisma, hashPassword, comparePasswords, createJWT, verifyEmailJWT, createEmailJWT, CustomException} from '../utils/index.js';
 
 
 

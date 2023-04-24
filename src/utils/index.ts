@@ -1,7 +1,7 @@
-import { comparePasswords, authMiddleware, hashPassword, createJWT, verifyJWT, createEmailJWT, verifyEmailJWT} from "./auth";
-import { passwordValidator, emailValidator, handleErrorsMiddleware } from "./validators";
-import { CustomException } from "./customException";
-import prisma from './db'
+import { comparePasswords, authMiddleware, hashPassword, createJWT, verifyJWT, createEmailJWT, verifyEmailJWT} from "./auth.js";
+import { passwordValidator, emailValidator, handleErrorsMiddleware } from "./validators.js";
+import { CustomException } from "./customException.js";
+import prisma from './db.js'
 
 
 export {

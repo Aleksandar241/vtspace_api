@@ -1,6 +1,6 @@
 import {Router} from 'express';
-import { emailSignup, confirmUser, login } from '../services';
-import { emailValidator, passwordValidator, handleErrorsMiddleware } from '../utils';
+import { emailSignup, confirmUser, login } from '../services/index.js';
+import { emailValidator, passwordValidator, handleErrorsMiddleware } from '../utils/index.js';
 
 const router = Router();
 
