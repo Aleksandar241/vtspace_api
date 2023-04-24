@@ -18,7 +18,7 @@ export const emailSignup = async ({email, password}) => {
         }
       });
       
-      const url = `http://localhost:3001/api/confirmation/${jwt}`;
+      const url = `${process.env.API}/api/confirmation/${jwt}`;
 
       const mailOptions = {
         from: 'vtspace@outlook.com',
