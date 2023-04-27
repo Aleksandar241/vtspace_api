@@ -53,6 +53,8 @@ router.post('/login', emailValidator, passwordValidator, handleErrorsMiddleware,
 
 router.post('/logout', async (req, res)=>{
 
+    
+    res.cookie('accesstoken', '', { expires: new Date(0) });
     res.clearCookie('accesstoken');
     res.json({message:'Korisnik je izlogovan'})
     res.end();
