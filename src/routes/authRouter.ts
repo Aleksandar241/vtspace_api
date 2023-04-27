@@ -55,7 +55,9 @@ router.post('/logout', async (req, res)=>{
 
     
     res.cookie('accesstoken', '', { expires: new Date(0), httpOnly: true, secure: true, sameSite: 'none' });
-    res.clearCookie('accesstoken');
+    res.clearCookie('accesstoken', {
+        maxAge: 0, httpOnly: true, secure: true, sameSite: 'none' 
+    });
     res.json({message:'Korisnik je izlogovan'})
     res.end();
 
