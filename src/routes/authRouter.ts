@@ -12,7 +12,7 @@ router.get('/confirmation/:token', async (req, res, next)=>{
         const token = req.params.token; 
         await confirmUser(token);
         res.status(301);
-        res.redirect('https://www.youtube.com/');
+        res.redirect(process.env.API);
     } catch (error) {
         next(error)
     }
