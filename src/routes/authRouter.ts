@@ -52,14 +52,10 @@ router.post('/login', emailValidator, passwordValidator, handleErrorsMiddleware,
 })
 
 router.post('/logout', async (req, res)=>{
-    const token = req.cookies.accessToken;
-  
-    if (!token) {
-      res.status(401);
-      res.send("Korisnik nije autorizovan");
-      return;
-    }
-    res.clearCookie('accessToken');
+
+    res.clearCookie('accesstoken');
+    res.json({message:'Korisnik je izlogovan'})
+    res.end();
 
 })
 
