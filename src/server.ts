@@ -15,7 +15,8 @@ const corsOptions = {
     credentials: true,
 }
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -30,7 +31,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', authRouter);
-app.use('/api/posts', authMiddleware, postsRouter);
+// app.use('/api/posts', authMiddleware, postsRouter);
+app.use('/api/posts', postsRouter);
 
 app.use((err, req, res, next) => {
       res.status(err?.status ?? 500)

@@ -1,0 +1,32 @@
+### 
+GET http://localhost:3001
+
+POST http://localhost:3001/api/signup
+Content-Type: application/json
+{
+    "email":"adrijana.savic86@gmail.com",
+    "password":"adrijana"
+}
+
+POST http://localhost:3001/api/login
+Content-Type: application/json
+{
+    "email":"adrijana.savic86@gmail.com",
+    "password":"adrijana"
+}
+
+GET http://localhost:3001/api/posts
+
+POST http://localhost:3001/api/posts/add
+Content-Type: application/json
+{
+    "title":"Post2",
+    "description":"Opis",
+    "belongsToId":"99ff56e2-e6ec-4519-a918-11b3b1bed924"
+
+}
+
+GET http://localhost:3001
+
+
+   
