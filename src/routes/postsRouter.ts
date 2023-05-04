@@ -1,14 +1,9 @@
-import {Router} from 'express';
-
+import { Router } from "express";
 
 const router = Router();
 
+router.get("/", async (req, res) => {
+  res.json({ message: "postovi" });
+});
 
-router.get('/', async (req, res)=>{
-
-    res.json({message: 'postovi'})
-})
-
-
-
-export  {router as postsRouter };
+export { router as postsRouter };
