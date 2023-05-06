@@ -4,6 +4,9 @@ import { CustomException, verifyJWT } from "../utils/index.js";
 export const getAllPosts = async () => {
   try {
     const posts = await prisma.post.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      },
       include: {
         belongsTo: {
           select: {
