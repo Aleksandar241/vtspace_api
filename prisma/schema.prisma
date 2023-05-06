@@ -27,7 +27,7 @@ model User {
   password  String
   name      String?
   surname   String?
-  image     Bytes?
+  image     String?
   status    STATUS?
   role      ROLES    @default(STUDENT)
   Post      Post[]

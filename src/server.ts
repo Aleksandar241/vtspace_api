@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import { authRouter, postsRouter } from "./routes/index.js";
+import { authRouter, postsRouter, userRouter } from "./routes/index.js";
 import { authMiddleware } from "./utils/index.js";
 
 const app = express();
@@ -34,6 +34,7 @@ app.use((req, res, next) => {
 
 app.use("/api", authRouter);
 app.use("/api/posts", authMiddleware, postsRouter);
+app.use("/api/user", authMiddleware, userRouter);
 
 app.use((err, req, res, next) => {
   res.status(err?.status ?? 500);
