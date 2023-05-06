@@ -9,7 +9,7 @@ import { authMiddleware } from "./utils/index.js";
 const app = express();
 
 const corsOptions = {
-  origin: [process.env.API],
+  origin: process.env.API,
   optionsSuccessStatus: 200,
   credentials: true,
 };
@@ -27,8 +27,6 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
   );
-  console.log(process.env.API);
-
   next();
 });
 
