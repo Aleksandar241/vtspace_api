@@ -43,7 +43,6 @@ export const emailSignup = async ({ email, password, name, surname }) => {
 export const createUser = async ({ email, password, name, surname }) => {
   const hash = await hashPassword(password);
 
-  try {
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -72,13 +71,6 @@ export const createUser = async ({ email, password, name, surname }) => {
       const token = createEmailJWT(user);
       return token;
     }
-    
-  } catch (error) {
-    throw new CustomException(
-      error?.message ?? "Greska na serveru",
-      error?.status ?? 500
-    );
-  }
  
 };
 
@@ -97,7 +89,6 @@ export const confirmUser = async (token) => {
     throw new CustomException("Korisnik je vec potvrdio registraciju", 400);
   }
 
-  try {
     const updatedUser = await prisma.user.update({
       where: {
         email: data.email,
@@ -116,15 +107,11 @@ export const confirmUser = async (token) => {
     });
     return updatedUser;
     
-  } catch (error) {
-    throw new CustomException("Greska na serveru", 500);
-  }
+ 
 };
 
 export const login = async ({ email, password }) => {
 
-  try {
-    
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -143,8 +130,4 @@ export const login = async ({ email, password }) => {
   
     return token;
 
-  } catch (error) {
-    throw new CustomException("Greska na serveru", 500);
-  }
- 
 };
