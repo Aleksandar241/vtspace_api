@@ -15,16 +15,35 @@ Content-Type: application/json
     "password":"adrijana"
 }
 
+### GET ALL POSTS
 GET http://localhost:3001/api/posts
 
+### GET POST BY ID
+GET http://localhost:3001/api/posts/0cf3f23e-b2c6-402f-a5ef-7d740428da52
+
+
+### DELETE POST BY ID
+DELETE http://localhost:3001/api/posts/9e47eed2-4b7e-40fc-8b5b-c3a74a459bed
+
+### ADD POST
 POST http://localhost:3001/api/posts/add
 Content-Type: application/json
 {
     "title":"Post2",
     "description":"Opis",
     "belongsToId":"99ff56e2-e6ec-4519-a918-11b3b1bed924"
-
 }
+
+### UPDATE POST BY ID
+PUT http://localhost:3001/api/posts/0cf3f23e-b2c6-402f-a5ef-7d740428da52
+Content-Type: application/json
+{
+    "title":"Post22",
+    "description":"Opis1"
+}
+
+
+
 
 GET http://localhost:3001
 
