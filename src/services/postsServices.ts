@@ -16,6 +16,8 @@ export const getAllPosts = async () => {
         },
       },
     });
+
+    
     return posts;
   } catch (error) {
     throw new CustomException("Greska na serveru", 500);
