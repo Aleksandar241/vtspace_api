@@ -57,7 +57,7 @@ router.put("/:id", roleMiddleware, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", roleMiddleware, async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
     const postID = await deletePostById(id);

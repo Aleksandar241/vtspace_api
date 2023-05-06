@@ -30,7 +30,7 @@ export const getAllPosts = async () => {
 export const getPostById = async (id) => {
   try {
     const post = await prisma.post.findUnique({
-      where: { id: id },
+      where: { id },
       include: {
         belongsTo: {
           select: {
@@ -52,7 +52,7 @@ export const getPostById = async (id) => {
 export const deletePostById = async (id) => {
   try {
     const post = await prisma.post.delete({
-      where: { id: id },
+      where: { id },
       select: {
         id: true,
       },
