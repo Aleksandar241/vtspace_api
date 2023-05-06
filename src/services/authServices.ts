@@ -97,24 +97,28 @@ export const confirmUser = async (token) => {
     throw new CustomException("Korisnik je vec potvrdio registraciju", 400);
   }
 
-  const updatedUser = await prisma.user.update({
-    where: {
-      email: data.email,
-    },
-    data: {
-      status: "ACTIVE",
-    },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      surname: true,
-      status: true,
-      role: true,
-    },
-  });
-
-  return updatedUser;
+  try {
+    const updatedUser = await prisma.user.update({
+      where: {
+        email: data.email,
+      },
+      data: {
+        status: "ACTIVE",
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        surname: true,
+        status: true,
+        role: true,
+      },
+    });
+    return updatedUser;
+    
+  } catch (error) {
+    throw new CustomException("Greska na serveru", 500);
+  }
 };
 
 export const login = async ({ email, password }) => {
