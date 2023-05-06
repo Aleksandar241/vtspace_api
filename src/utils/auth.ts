@@ -50,8 +50,9 @@ export const authMiddleware = (req, res, next) => {
 export const roleMiddleware = (req, res, next) => {
   const token = req.cookies.accessToken;
   const user = verifyJWT(token)
-  if (user.role === 'ADMIN' || user.id === res.body?.belongsToId) {
-    next()
+  
+  if (user.role === 'ADMIN' || user.id === req.body?.belongsToId) {
+    return next()
   }
   res.status(401);
   res.send("Korisnik nije autorizovan");
