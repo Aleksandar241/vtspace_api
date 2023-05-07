@@ -48,19 +48,23 @@ export const createUser = async ({ email, password, name, surname }) => {
   });
 
   if (!user) {
-    const userResponse = await prisma.user.create({
-      data: {
-        email,
-        name,
-        surname,
-        password: hash,
-        status: "PENDING",
-      },
-    });
+    try {
+      const userResponse = await prisma.user.create({
+        data: {
+          email,
+          name,
+          surname,
+          password: hash,
+          status: "PENDING",
+        },
+      });
 
-    const token = createEmailJWT(userResponse);
+      const token = createEmailJWT(userResponse);
 
-    return token;
+      return token;
+    } catch (error) {
+      throw new CustomException("Greska na serveru", 500);
+    }
   }
 
   if (user.status === "ACTIVE") {
@@ -80,46 +84,62 @@ export const confirmUser = async (token) => {
     throw new CustomException("Korisnik nije autorizovan", 401);
   }
 
-  const user = await prisma.user.findUnique({
-    where: { email: data.email },
-  });
+  let user = null;
 
-  if (user.status === "ACTIVE") {
-    throw new CustomException("Korisnik je vec potvrdio registraciju", 400);
+  try {
+    user = await prisma.user.findUnique({
+      where: { email: data.email },
+    });
+    if (user.status === "ACTIVE") {
+      throw new CustomException("Korisnik je vec potvrdio registraciju", 400);
+    }
+  } catch (error) {
+    throw new CustomException("Greska na serveru", 500);
   }
 
-  const updatedUser = await prisma.user.update({
-    where: {
-      email: data.email,
-    },
-    data: {
-      status: "ACTIVE",
-    },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      surname: true,
-      status: true,
-      role: true,
-    },
-  });
+  let updatedUser = null;
+  try {
+    updatedUser = await prisma.user.update({
+      where: {
+        email: data.email,
+      },
+      data: {
+        status: "ACTIVE",
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        surname: true,
+        status: true,
+        role: true,
+      },
+    });
+  } catch (error) {
+    throw new CustomException("Greska na serveru", 500);
+  }
+
   return updatedUser;
 };
 
 export const login = async ({ email, password }) => {
-  const user = await prisma.user.findUnique({
-    where: { email },
-    select: {
-      id: true,
-      name: true,
-      surname: true,
-      email: true,
-      role: true,
-      password: true,
-      status: true,
-    },
-  });
+  let user = null;
+  try {
+    user = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        name: true,
+        surname: true,
+        email: true,
+        role: true,
+        password: true,
+        status: true,
+      },
+    });
+  } catch (error) {
+    throw new CustomException("Greska na serveru", 500);
+  }
 
   if (!user) {
     throw new CustomException("Korisinik ne postoji", 404);
