@@ -127,6 +127,15 @@ export const login = async ({ email, password }) => {
     
     const user = await prisma.user.findUnique({
       where: { email },
+      select: {
+        id: true,
+        name: true,
+        surname: true,
+        email: true,
+        role: true,
+        password:  true,
+        status: true,
+      }
     });
   
     if (!user) {
@@ -138,10 +147,10 @@ export const login = async ({ email, password }) => {
     if (!isValid) {
       throw new CustomException("Password nije dobar", 400);
     }
-  
+    
     const token = createJWT(user);
-  
-    return token;
+    delete user.password;
+    return {token, user};
 
   } catch (error) {
     throw new CustomException("Greska na serveru", 500);

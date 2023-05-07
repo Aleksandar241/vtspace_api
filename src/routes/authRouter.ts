@@ -46,7 +46,7 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      const token = await login({ email, password });
+      const {token, user} = await login({ email, password });
       res.status(200);
       res.cookie("accessToken", token, {
         maxAge: Date.now() + 10 * 365 * 24 * 60 * 60 * 1000,
@@ -54,7 +54,7 @@ router.post(
         secure: true,
         sameSite: "none",
       });
-      res.json({ token });
+      res.json(user);
     } catch (error) {
       next(error);
     }
