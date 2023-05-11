@@ -31,7 +31,7 @@ export const emailSignup = async ({ email, password, name, surname }) => {
     };
 
     await transporter.sendMail(mailOptions);
-    return { message: "Verifikacioni mejl je poslat." };
+    return  "Verifikacioni mejl je poslat." ;
   } catch (error) {
     throw new CustomException(
       error?.message ?? "Verifikacioni mejl ne moze biti poslat.",
