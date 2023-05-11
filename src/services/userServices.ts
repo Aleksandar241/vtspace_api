@@ -3,9 +3,10 @@ import { CustomException, verifyJWT } from "../utils/index.js";
 
 export const getUser = async (token) => {
   const userData = verifyJWT(token);
+  
   try {
     const user = await prisma.user.findUnique({
-      where: { id: userData?.id },
+      where: { email: userData?.email },
       select: {
         id: true,
         name: true,
@@ -15,6 +16,7 @@ export const getUser = async (token) => {
         email: true,
       },
     });
+    
     return user;
   } catch (error) {
     throw new CustomException("Greska na serveru", 500);
