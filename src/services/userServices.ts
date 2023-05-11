@@ -37,6 +37,8 @@ export const updateUser = async (token, image, name, surname) => {
 
     return user;
   } catch (error) {    
+    console.log('update user', error);
+    
     throw new CustomException("Greska na serveru", 500);
   }
 };
