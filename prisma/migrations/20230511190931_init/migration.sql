@@ -12,7 +12,7 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "name" TEXT,
     "surname" TEXT,
-    "image" BYTEA,
+    "image" TEXT,
     "status" "STATUS",
     "role" "ROLES" NOT NULL DEFAULT 'STUDENT',
 
