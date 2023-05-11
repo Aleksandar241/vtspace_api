@@ -23,9 +23,10 @@ export const getUser = async (token) => {
 
 export const updateUser = async (token, image, name, surname) => {
   const userData = verifyJWT(token);
+
   try {
     const user = await prisma.user.update({
-      where: { id: userData?.id },
+      where: { email: userData?.email },
       data: { image, name, surname },
       select: {
         id: true,
@@ -33,7 +34,7 @@ export const updateUser = async (token, image, name, surname) => {
     });
 
     return user;
-  } catch (error) {
+  } catch (error) {    
     throw new CustomException("Greska na serveru", 500);
   }
 };
